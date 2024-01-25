@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.core.serializer.Serializer;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,8 +24,10 @@ public class PlayerModel  implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
+    @Column(unique = true)
     private String email;
     private String fone;
+    @Column(unique = true)
     private String nickname;
     private String group;
 
