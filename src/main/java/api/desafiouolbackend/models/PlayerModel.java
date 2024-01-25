@@ -1,0 +1,33 @@
+package api.desafiouolbackend.models;
+
+import java.io.Serializable;
+import java.util.UUID;
+
+import org.springframework.core.serializer.Serializer;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Getter
+@Setter
+@Table(name = "TB_PLAYER")
+public class PlayerModel  implements Serializable{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
+    private String name;
+    private String email;
+    private String fone;
+    private String nickname;
+    private String group;
+
+
+    
+}
