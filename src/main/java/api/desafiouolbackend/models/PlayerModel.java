@@ -19,17 +19,18 @@ import lombok.Setter;
 @Setter
 @Table(name = "TB_PLAYER")
 public class PlayerModel  implements Serializable{
-
+    
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private UUID idPlayer;
     private String name;
     @Column(unique = true)
     private String email;
     private String fone;
     @Column(unique = true)
     private String nickname;
-    private String group;
+    private String grouphero;
 
 
     
