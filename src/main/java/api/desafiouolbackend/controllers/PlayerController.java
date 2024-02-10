@@ -15,15 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import api.desafiouolbackend.dtos.PlayerNewDto;
+import api.desafiouolbackend.models.PlayerModel;
 import api.desafiouolbackend.repositorys.PlayerRepository;
-import api.desafiouolbackend.services.NickeNammeService;
+import api.desafiouolbackend.services.NickNameService;
 import api.desafiouolbackend.services.PlayerService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,20 +33,22 @@ public class PlayerController {
     @Autowired
     PlayerService playerService;
 
-    @Autowired
-    PlayerRepository playerRepository;
+   
 
-    @Autowired
-    NickeNammeService nammeService;
     
     @PostMapping("api/player")
    public ResponseEntity<Object> savePlayer(@RequestBody @Valid PlayerNewDto playerNewDto){
       try {
-        playerService.salvePlayer(playerNewDto);
-        return ResponseEntity.ok().build();
+       PlayerModel responseModel = new PlayerModel();
+       responseModel= playerService.salvePlayer(playerNewDto);
+       
+       if(responseModel.getNickname() == null) {
+    	   return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("No more users available!");
+       }
+        return ResponseEntity.ok().body(responseModel);
 
       } catch (Exception e) {
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("error, try again, if it persists, contact support@api.com");
       }
        
 

@@ -12,56 +12,47 @@ import api.desafiouolbackend.repositorys.PlayerRepository;
 
 @Service
 public class PlayerService {
-     @Autowired
-    PlayerRepository playerRepository;
+	@Autowired
+	PlayerRepository playerRepository;
 
-    @Autowired
-    NickeNammeService nammeService;
+	@Autowired
+	NickNameService nickNameService;
 
+	public PlayerModel salvePlayer(PlayerNewDto playerNewDto) throws Exception {
 
-    public void salvePlayer(PlayerNewDto playerNewDto) throws Exception{
-     
-        if (playerNewDto.grouphero().equalsIgnoreCase("vingadores")) {
-           PlayerModel playerModel = new PlayerModel();
-           playerModel.setEmail(playerNewDto.email());
-           playerModel.setFone(playerNewDto.fone());
-           playerModel.setName(playerNewDto.name());
-           playerModel.setGrouphero(playerNewDto.grouphero());
-           try {
-            playerModel.setNickname(nammeService.ValidHeroAvengers());
-        } catch (JsonMappingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		if (playerNewDto.grouphero().equalsIgnoreCase("avengers")) {
+			String heroNickerNameValid = nickNameService.validHeroAvengers();
+			if (heroNickerNameValid == "") {
+				return new PlayerModel();
+			}
+			PlayerModel playerModel = new PlayerModel();
+			playerModel.setEmail(playerNewDto.email());
+			playerModel.setFone(playerNewDto.fone());
+			playerModel.setName(playerNewDto.name());
+			playerModel.setGrouphero(playerNewDto.grouphero());
 
-           playerRepository.save(playerModel);
+			playerModel.setNickname(heroNickerNameValid);
 
+			return playerRepository.save(playerModel);
 
-            
-        }else if (playerNewDto.grouphero().equalsIgnoreCase("justiça")){
+		} else if (playerNewDto.grouphero().equalsIgnoreCase("justice league")) {
+			String heroNickerNameValid = nickNameService.validHeroJustice();
+			if (heroNickerNameValid == "") {
+				return new PlayerModel();
+			}
+			PlayerModel playerModel = new PlayerModel();
+			playerModel.setEmail(playerNewDto.email());
+			playerModel.setFone(playerNewDto.fone());
+			playerModel.setName(playerNewDto.name());
+			playerModel.setGrouphero(playerNewDto.grouphero());
 
-            PlayerModel playerModel = new PlayerModel();
-            playerModel.setEmail(playerNewDto.email());
-            playerModel.setFone(playerNewDto.fone());
-            playerModel.setName(playerNewDto.name());
-            playerModel.setGrouphero(playerNewDto.grouphero());
-            try {
-             playerModel.setNickname(nammeService.ValidHeroJustice());
-         } catch (JsonMappingException e) {
-             // TODO Auto-generated catch block
-             e.printStackTrace();
-         } catch (JsonProcessingException e) {
-             // TODO Auto-generated catch block
-             e.printStackTrace();
-         }
- 
-            playerRepository.save(playerModel);
- 
+			playerModel.setNickname(heroNickerNameValid);
 
-        }
+			return playerRepository.save(playerModel);
 
-    }
+		} else {
+			return null;
+		}
+
+	}
 }
