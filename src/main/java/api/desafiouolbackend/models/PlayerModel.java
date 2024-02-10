@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,12 +25,21 @@ public class PlayerModel  implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID idPlayer;
+    
+    @NotNull
+    @Column(length = 255, nullable = false)
     private String name;
-  
+    @Column(length = 255, nullable = false,unique = true)
+    @NotNull
     private String email;
+    @Column(length = 255, nullable = false)
+    @NotNull
     private String fone;
-    @Column(unique = true)
+    @NotNull
+    @Column(length = 255, nullable = false,unique = true)
     private String nickname;
+    @NotNull
+    @Column(length = 255, nullable = false)
     private String grouphero;
 	public UUID getIdPlayer() {
 		return idPlayer;

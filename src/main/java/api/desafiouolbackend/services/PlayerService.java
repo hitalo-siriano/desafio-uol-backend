@@ -1,5 +1,8 @@
 package api.desafiouolbackend.services;
 
+import java.sql.SQLException;
+
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
