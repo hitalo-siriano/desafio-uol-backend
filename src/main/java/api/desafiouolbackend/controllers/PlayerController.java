@@ -70,7 +70,7 @@ public class PlayerController {
 		}
 	}
 	@GetMapping("/api/view/player")
-	public ResponseEntity<List<Object>> getRegisteredUsersReport(){
+	public ResponseEntity<List<PlayerModel>> getRegisteredUsersReport(){
 		try {
 		
 		return ResponseEntity.status(HttpStatus.OK).body(playerService.getUser());

@@ -17,7 +17,7 @@ public interface PlayerRepository extends JpaRepository<PlayerModel,UUID> {
     @Query("SELECT t.nickname  FROM PlayerModel t")
     List<String> grouphero();
     
-    @Query("SELECT t.name,t.email,t.fone,t.nickname,t.grouphero FROM PlayerModel t")
-    List<Object> viewPlayer();
+    @Query("SELECT t FROM PlayerModel t")
+    List<PlayerModel> viewPlayer();
     
 }

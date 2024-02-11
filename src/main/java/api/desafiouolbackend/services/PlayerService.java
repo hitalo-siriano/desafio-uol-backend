@@ -101,7 +101,7 @@ public class PlayerService {
 
 	}
 	
-	public List <Object> getUser() {
+	public List <PlayerModel> getUser() {
 		
 		return  playerRepository.viewPlayer();
 	}
