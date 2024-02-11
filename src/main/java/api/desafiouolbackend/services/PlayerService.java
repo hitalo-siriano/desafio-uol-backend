@@ -1,6 +1,7 @@
 package api.desafiouolbackend.services;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,5 +58,10 @@ public class PlayerService {
 			return null;
 		}
 
+	}
+	
+	public List <Object> getUser() {
+		
+		return  playerRepository.viewPlayer();
 	}
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.hibernate.JDBCException;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+
 import org.hibernate.internal.util.JdbcExceptionHelper;
 import org.hibernate.tool.schema.spi.SqlScriptException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +41,17 @@ public class PlayerController {
 	public ResponseEntity<Object> savePlayer(@RequestBody @Valid PlayerNewDto playerNewDto) {
 		try {
 			PlayerModel responseModel = new PlayerModel();
+			
 			responseModel = playerService.salvePlayer(playerNewDto);
+			
+			
+			
+			
 
 			if (responseModel.getNickname() == null) {
 				return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body("No more users available!");
 			}
+			
 			return ResponseEntity.ok().body(responseModel);
 
 		} catch (DataIntegrityViolationException e) {
@@ -56,6 +62,16 @@ public class PlayerController {
 			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body("error, try again, if it persists, contact support@api.com");
+		}
+	}
+	@GetMapping("/api/view/player")
+	public ResponseEntity<List<Object>> getRegisteredUsersReport(){
+		try {
+		
+		return ResponseEntity.status(HttpStatus.OK).body(playerService.getUser());
+	} catch (Exception e) {
+		e.printStackTrace();
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
 }
