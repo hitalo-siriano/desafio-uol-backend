@@ -4,7 +4,7 @@ Desafio criado no Padrão Rest.
 
 ## Link Hospedagem da Api
 
-https://api-uol-desafio.hitalosirianodev.com.br/
+https://api-uol-desafio.hitalosirianodev.com.br
 
 ## Link desafio
 
